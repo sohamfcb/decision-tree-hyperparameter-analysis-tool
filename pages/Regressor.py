@@ -32,6 +32,7 @@ def drawRegressionLine():
 
     dtree=DecisionTreeRegressor(
         max_depth=None if max_depth is None else int(max_depth),
+        criterion=criterion
         splitter=splitter,
         min_samples_leaf=min_samples_leaf,
         min_samples_split=min_samples_split,
