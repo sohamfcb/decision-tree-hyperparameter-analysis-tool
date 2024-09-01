@@ -9,9 +9,24 @@ from sklearn.tree import DecisionTreeClassifier,plot_tree
 from matplotlib.colors import ListedColormap
 from sklearn.metrics import accuracy_score
 
+st.set_page_config(page_title='Classification')
+
 plt.style.use('seaborn-v0_8-darkgrid')
 
-st.title('Decision Tree Classifier: Hyperparameter Analysis Tool')
+st.title('Decision Tree Classifier Hyperparameter Analysis')
+
+def showData():
+    
+    plt.figure(figsize=(10,5))
+
+    plt.scatter(X.iloc[:,0][y==0],X.iloc[:,1][y==0],c='red',label='Didn\'t Purchase')
+    plt.scatter(X.iloc[:,0][y==1],X.iloc[:,1][y==1],c='green',label='Purchased')
+    plt.xlabel('Age')
+    plt.ylabel('Salary')
+    plt.legend()
+
+    st.pyplot(plt)
+    plt.close()
 
 def plot_decision_boundary(max_leaf_nodes2,criterion2='gini',splitter2='best',min_samples_split2=2,min_samples_leaf2=1,max_features2=None,max_depth2=None,min_impurity_decrease2=None):
 
@@ -86,6 +101,8 @@ combined_scaled_df=np.vstack((X_train_scaled,X_test_scaled))
 
 st.sidebar.title('DecisionTreeClassifier() Hyperparameters')
 
+showData()
+
 criterion=st.sidebar.selectbox('Criterion',['gini','entropy','log_loss'])
 splitter=st.sidebar.selectbox('Splitter',['best','random'])
 max_depth=st.sidebar.number_input(label='Max Depth',step=1,min_value=1,value=None)
@@ -95,18 +112,6 @@ max_features=st.sidebar.select_slider(label='Max Features',options=list(range(1,
 max_leaf_nodes=st.sidebar.number_input(label='Max Leaf Nodes',min_value=2,step=1,value=None)
 min_impurity_decrease=st.sidebar.number_input(label='Min Impurity Decrease',min_value=0.0,value=0.0)
 
-if st.button('Show the Data'):
-    
-    plt.figure(figsize=(10,5))
-
-    plt.scatter(X.iloc[:,0][y==0],X.iloc[:,1][y==0],c='red',label='Didn\'t Purchase')
-    plt.scatter(X.iloc[:,0][y==1],X.iloc[:,1][y==1],c='green',label='Purchased')
-    plt.xlabel('Age')
-    plt.ylabel('Salary')
-    plt.legend()
-
-    st.pyplot(plt)
-    plt.close()
 
 if st.sidebar.button('Run'):
 
