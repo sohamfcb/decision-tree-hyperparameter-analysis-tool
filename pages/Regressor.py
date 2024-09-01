@@ -32,7 +32,7 @@ def drawRegressionLine():
 
     dtree=DecisionTreeRegressor(
         max_depth=None if max_depth is None else int(max_depth),
-        criterion=criterion,
+        criterion=criterion if criterion is not 'poisson' else 'squared_error',
         splitter=splitter,
         min_samples_leaf=min_samples_leaf,
         min_samples_split=min_samples_split,
@@ -88,6 +88,9 @@ st.sidebar.title('DecisionTreeRegressor() Hyperparameters')
 showData()
 
 criterion=st.sidebar.selectbox('Criterion',['squared_error','friedman_mse','absolute_error','poisson'])
+if criterion=='poisson':
+    st.error('Labels have negative values. Try another criterion!')
+
 splitter=st.sidebar.selectbox('Splitter',['best','random'])
 max_depth=st.sidebar.number_input(label='Max Depth',step=1,min_value=1,value=None)
 min_samples_split=st.sidebar.select_slider(label='Min Samples Split',options=list(range(2,len(X_test)+1)),value=2)
