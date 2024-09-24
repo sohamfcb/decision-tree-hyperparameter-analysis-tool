@@ -17,15 +17,15 @@ Exploratory Data Analysis (EDA)
 
 Model Details
 
-    RandomForestRegressor:
-        n_estimators: 200
-        Max depth and other hyperparameters are tuned for performance.
-        Trained and validated on a portion of the dataset to ensure accuracy.
+  - RandomForestRegressor:
+  - n_estimators: 200
+  - Max depth and other hyperparameters are tuned for performance.
+  - Trained and validated on a portion of the dataset to ensure accuracy.
 
 Requirements
 
-    Python 3.x
-    Pandas
-    Scikit-learn
-    Matplotlib
-    Seaborn
+    numpy
+    pandas
+    scikit-learn
+    matplotlib
+    seaborn
